@@ -14,25 +14,25 @@ Customize haptic feedback with sliders for:
 ## Setting Up the Project
 Follow these steps to get the app running on your device:
 
-### Clone or Download the Repository:
+### 1. Clone or Download the Repository:
 Download the project as a ZIP file or clone the repository using:
 bash
 Copy code
 git clone <repository-url>
 Replace <repository-url> with the actual repository link.
 
-### Open the Project in Xcode:
+### 2. Open the Project in Xcode:
 Navigate to the project directory and open HapticPlayground.xcodeproj in Xcode.
 
-### Select a Target Device:
+### 3. Select a Target Device:
 Connect your iOS device to your Mac or use a compatible simulator (though haptics are best experienced on physical devices).
 Select your device from the list of available targets in Xcode's toolbar.
 
-### Configure Signing:
+### 4. Configure Signing:
 Go to the Signing & Capabilities tab in Xcode.
 Choose your developer team or set up a new team if required.
 
-### Build and Run:
+### 5. Build and Run:
 Press Cmd + R or click the Run button in Xcode to build and launch the app on your device.
 
 ## Testing the App
