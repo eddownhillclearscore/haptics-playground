@@ -14,6 +14,7 @@ struct ContentView: View {
     @State private var selectedTitle: String?
     @State private var selectedDescription: String?
 
+    @State private var nativeCurveId: UUID?
     @State private var selectedCurve: SimpleHapticCurve?
     @State private var isPresentingPopover = false
 
@@ -23,15 +24,32 @@ struct ContentView: View {
                 .font(.largeTitle)
                 .padding()
 
-            List(SimpleHapticCurve.examples) { curve in
-                Button(action: {
-                    selectedCurve = curve
-                    applyCurve(curve)
-                }) {
-                    Text(curve.name)
+            if #available(iOS 17.0, *) {
+                List(SimpleHapticCurve.nativeCurves) { curve in
+                    Button(action: {
+                        nativeCurveId = curve.id
+                        DispatchQueue.main.asyncAfter(deadline: .now() + 0.1){
+                            nativeCurveId = nil
+                        }
+                    }) {
+                        Text(curve.name)
+                    }
+                    .sensoryFeedback(curve.feedback, trigger: nativeCurveId) { old, new in
+                        new == curve.id
+                    }
                 }
+                .frame(maxHeight: .infinity)
+            } else {
+                List(SimpleHapticCurve.examples) { curve in
+                    Button(action: {
+                        selectedCurve = curve
+                        applyCurve(curve)
+                    }) {
+                        Text(curve.name)
+                    }
+                }
+                .frame(maxHeight: .infinity)
             }
-            .frame(height: 200)
 
             VStack(spacing: 20) {
                 sliderRow(title: "Duration", value: $hapticManager.duration, range: 0...3, description: "Duration of the haptic feedback.")

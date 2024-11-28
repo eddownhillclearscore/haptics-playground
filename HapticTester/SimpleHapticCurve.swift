@@ -46,4 +46,25 @@ struct SimpleHapticCurve: Identifiable {
             releaseTime: 0.5
         )
     ]
+    
+    @available(iOS 17.0, *)
+    static let nativeCurves: [NativeHapticCurve] = [
+        .init(name: "Start", feedback: .start),
+        .init(name: "Stop", feedback: .stop),
+        .init(name: "Alignment", feedback: .alignment),
+        .init(name: "Decrease", feedback: .decrease),
+        .init(name: "Increase", feedback: .increase),
+        .init(name: "Level Change", feedback: .levelChange),
+        .init(name: "Selection", feedback: .selection),
+        .init(name: "Success", feedback: .success),
+        .init(name: "Warning", feedback: .warning),
+        .init(name: "Error", feedback: .error)
+    ]
+}
+
+@available(iOS 17.0, *)
+struct NativeHapticCurve: Identifiable {
+    let id = UUID()
+    let name: String
+    let feedback: SensoryFeedback
 }
